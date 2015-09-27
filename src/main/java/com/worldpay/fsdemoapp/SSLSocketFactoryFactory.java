@@ -70,17 +70,18 @@ public class SSLSocketFactoryFactory {
 	 * will be done on the server side (only PFS suites will be offered).
 	 * </p>
 	 * <p>
-	 * Also forces TLS 1.2 protocol only.</p>
+	 * Also forces TLS 1.2 protocol only.
+	 * </p>
 	 *
 	 * @throws NoSuchAlgorithmException thrown if the default cipher suite is not available.
 	 * @throws IOException thrown if there is a problem reading the keystore from the disk.
 	 * @throws CertificateException thrown if there is a problem with a certificate used.
 	 * @throws KeyStoreException thrown if there is a problem accessing the keystore containing a certificate.
-	 * @throws KeyManagementException thrown if there is an issue using the selected key. 
+	 * @throws KeyManagementException thrown if there is an issue using the selected key.
 	 * @throws UnrecoverableKeyException thrown if the key could not be recovered from the keystore (usually means password is wrong).
 	 */
 	public SSLSocketFactory getSocketFactory()
-					throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, CertificateException, IOException, UnrecoverableKeyException {
+					throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, CertificateException, IOException {
 		SSLContext clientContext = SSLContext.getInstance("TLSv1.2");
 		// The client certificate needs a trust manager configured with the server certificate.
 		clientContext.init(null, loadServerCertificates("ServerPublicCertificateKeystore.jks"), null);
