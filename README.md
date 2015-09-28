@@ -32,3 +32,6 @@ Filename|Description
 `Cipher Suite Test Results.xlsx`|Results of running all the different ciphers available in TLS with different types of keys, recording whether they worked or not.  Java source in [TryAllCiphers.java](https://github.com/andybrodie/fsdemoapp/blob/master/src/main/java/com/worldpay/fsdemoapp/programs/TryAllCiphers.java).
 `Forward Secrecy in Java.docx`|Word document that explains Forward Secrecy from first principles, avoiding maths wherever possible.
 `Forward Secrecy in Java.pptx`|PowerPoint presentation explaining forward secrecy with no maths at all!|
+
+# License
+All code is licensed under the MIT license.  See [License](https://github.com/andybrodie/fsdemoapp/blob/master/LICENSE).
