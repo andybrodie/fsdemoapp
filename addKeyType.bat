@@ -14,12 +14,14 @@ rem See Java Keytool documentation for more information.
 
 setlocal
 
+rem If the first argument isn't specified, set to RSA
 if "%1" == "" (
 	set keyalg=rsa
 ) else (
 	set keyalg=%1
 )
 
+rem If the second argument isn't specified, set to 2048 bit)
 if "%2" == "" (
 	set keysize=2048
 ) else (
@@ -27,6 +29,12 @@ if "%2" == "" (
 )
 @echo Creating %keysize% bit key using algorithm %keyalg%
 call keytool_priv -genkeypair -keysize %keysize% -alias %keyalg%%keysize% -validity 360 -dname "CN=Test (%keyalg%-%keysize%), O=Worldpay, L=Cambridge, ST=Cambridgeshire, C=UK" -keypass keypass -keyalg %keyalg% 
+
+rem Export the public certificate only from the keystore and put in to a .cer file
 call keytool_priv -exportcert -alias %keyalg%%keysize% -file %keyalg%%keysize%.cer 
+
+rem Import the public certificate in to the trust store
 call keytool_pub -importcert -file %keyalg%%keysize%.cer -alias %keyalg%%keysize% -noprompt
+
+rem Tidy up the exported certificate, we don't need it
 del %keyalg%%keysize%.cer
