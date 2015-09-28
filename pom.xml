@@ -1,24 +1,47 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.worldpay</groupId>
-  <artifactId>SecurityTest</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>Forward Secrecy Demo Application</name>
-  <description>Shows off how TLS can be achieved using JSSE for a very simple client/server application, along with some support utilities.</description>
-  <properties>
-  	<slf4jVersion>1.6.1</slf4jVersion>
-  </properties>
-  <dependencies>
-  	<dependency>
-  		<groupId>org.slf4j</groupId>
-  		<artifactId>slf4j-api</artifactId>
-  		<version>${slf4jVersion}</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.slf4j</groupId>
-  		<artifactId>slf4j-simple</artifactId>
-  		<version>${slf4jVersion}</version>
-  		<scope>runtime</scope>
-  	</dependency>
-  </dependencies>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.worldpay</groupId>
+	<artifactId>SecurityTest</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Forward Secrecy Demo Application</name>
+	<description>Shows off how TLS can be achieved using JSSE for a very simple client/server application, along with some support utilities.</description>
+	<properties>
+		<slf4jVersion>1.6.1</slf4jVersion>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/alternateLocation</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4jVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4jVersion}</version>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
 </project>
