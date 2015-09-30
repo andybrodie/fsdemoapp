@@ -59,7 +59,7 @@ public class SSLSocketFactoryFactory {
 		} catch (FileNotFoundException fnfe) {
 			// If they keystore doesn't exist, then return empty so we can try out what works with NO keystore
 			LOG.error("Unable to find store file {}", certificateStoreFile);
-			return new TrustManager[0];
+			throw fnfe;
 		}
 
 	}
@@ -84,7 +84,7 @@ public class SSLSocketFactoryFactory {
 					throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, CertificateException, IOException {
 		SSLContext clientContext = SSLContext.getInstance("TLSv1.2");
 		// The client certificate needs a trust manager configured with the server certificate.
-		clientContext.init(null, loadServerCertificates("ServerPublicCertificateKeystore.jks"), null);
+		clientContext.init(null, loadServerCertificates("ServerPublicCertificateKeyStore.jks"), null);
 		return clientContext.getSocketFactory();
 	}
 
